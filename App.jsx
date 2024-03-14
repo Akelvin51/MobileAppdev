@@ -1,27 +1,21 @@
-/**
- * My To Do List App
- *
- * @format
- */
-import { useState } from 'react';
-import React from 'react';
+import React, { useState } from 'react';
+import { SafeAreaView } from 'react-native';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
-import {
-  SafeAreaView,
-} from 'react-native';
 
 function App() {
   const [tasks, setTasks] = useState(['Do laundry', 'Go to gym', 'Walk dog']);
 
+  const addTask = (taskText) => {
+    if (!taskText.trim() || tasks.includes(taskText)) return; // Prevent adding empty or duplicate tasks
+    setTasks([...tasks, taskText]);
+  };
+
   return (
     <SafeAreaView>
       <TodoList tasks={tasks} />
-      <TodoForm/>
-
+      <TodoForm addTask={addTask}/>
     </SafeAreaView>
-       
-
   );
 }
 

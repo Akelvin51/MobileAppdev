@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native';
-import TodoForm from './components/TodoForm';
-import TodoList from './components/TodoList';
+import HomeScreen from './components/HomeScreen';
+import AboutScreen from './components/AboutScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+
+const Stack = createNativeStackNavigator();
 function App() {
   const [tasks, setTasks] = useState(['Do laundry', 'Go to gym', 'Walk dog']);
 
@@ -12,10 +16,14 @@ function App() {
   };
 
   return (
-    <SafeAreaView>
-      <TodoList tasks={tasks} />
-      <TodoForm addTask={addTask}/>
+    <NavigationContainer>
+      <SafeAreaView>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="About" component={AboutScreen} />
     </SafeAreaView>
+
+    </NavigationContainer>
+    
   );
 }
 
